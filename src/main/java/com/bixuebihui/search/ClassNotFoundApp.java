@@ -17,7 +17,7 @@ public class ClassNotFoundApp {
 
         //use first arg as an artifact group id and second arg as class name and third arg as method name
         if(args.length < 1){
-            System.out.println("Usage: method-not-found <className> [methodName] [groupId1,groupId2...]");
+            System.out.println("Usage: class-not-found <className> [methodName] [groupId1,groupId2...]");
             return;
         }
 

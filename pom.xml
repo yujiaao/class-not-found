@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>org.bixuebihui</groupId>
-    <artifactId>method-not-found</artifactId>
+    <artifactId>class-not-found</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>method-not-found</name>
-    <description>method-not-found</description>
+    <name>class-not-found</name>
+    <description>class-not-found</description>
     <packaging>jar</packaging>
 
     <properties>
