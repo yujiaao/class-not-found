@@ -23,7 +23,14 @@ public class ClassNotFoundApp {
 
         String[] groupIds = args.length>3? args[3].split(","): new String[]{""};
         String className = args[1];
-        String methodName = args.length>2?  args[2] : "";
+        String methodName;
+        if(args.length > 2 && args[2].equals("-")){
+            methodName = "";
+        } else if(args.length > 2){
+            methodName = args[2] ;
+        }else{
+            methodName = "";
+        }
         System.out.println("groupId: " + Arrays.toString(groupIds));
         System.out.println("className: " + className);
         System.out.println("methodName: " + methodName);

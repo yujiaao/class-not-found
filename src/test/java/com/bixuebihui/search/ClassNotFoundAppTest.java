@@ -32,15 +32,28 @@ class ClassNotFoundAppTest {
     }
 
     @Test
-    void testing() throws IOException, ClassNotFoundException {
+    void testing() throws IOException {
 
         String groupId = "org.slf4j,ch.qos.logback";
         String className = "StaticMarkerBinder";
         String methodName = "getSingleton";
 
-        ClassNotFoundApp.main(new String[]{groupId, className, methodName});
+        ClassNotFoundApp.main(new String[]{"app", className, methodName, groupId});
 
     }
+
+    @Test
+    void testing1() throws IOException {
+
+       //  String groupId = "org.springframework.boot.context.properties";
+        String groupId = "org.springframework.boot";
+        String className = "ConfigurationBeanFactoryMetadata";
+        String methodName = "-";
+
+        ClassNotFoundApp.main(new String[]{"app", className, methodName, groupId});
+
+    }
+
 
     @Test
     void testAsm() throws IOException {

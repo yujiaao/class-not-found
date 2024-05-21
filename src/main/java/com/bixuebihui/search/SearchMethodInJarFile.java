@@ -78,7 +78,7 @@ public class SearchMethodInJarFile {
                 if(!fileName.endsWith(".class")) continue;
 
                 if (classFilePath!=null) {
-                    if(fileName.equals(classFilePath)){
+                    if(fileName.equals(classFilePath) || fileName.endsWith("/"+classFilePath)){
                         if(StringUtils.isBlank(targetMethodName)){
                             return true;
                         }
@@ -140,9 +140,9 @@ public class SearchMethodInJarFile {
                  * Print the message in console if the method name is expected.
                  */
                 if (targetMethodName.equals(m.getName())) {
-                    System.out.println(String.format(
-                            "Method [%s] is included in Class [%s]",
-                            targetMethodName, name));
+                    System.out.printf(
+                            "Method [%s] is included in Class [%s]%n",
+                            targetMethodName, name);
                     return true;
                 }
             }
