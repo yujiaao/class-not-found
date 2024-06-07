@@ -1,6 +1,10 @@
 package com.bixuebihui.search;
 
 import io.micrometer.common.util.StringUtils;
+import org.dom4j.Document;
+import org.dom4j.DocumentException;
+import org.dom4j.DocumentHelper;
+import org.dom4j.Node;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.tree.ClassNode;
 import org.objectweb.asm.tree.MethodNode;
@@ -56,6 +60,17 @@ public class SearchMethodInJarFile {
 
     }
 
+    public static String getMavenRepoFromSettingsXml(String settingsXml) throws IOException, DocumentException {
+        String validateText = Files.readString(Path.of(settingsXml));
+        Document doc = DocumentHelper.parseText(validateText);
+        Node node = doc.selectSingleNode("/*[name()='settings']/*[name()='localRepository']/text()");
+        //System.out.println(node.getPath());
+        if (node == null) {
+            throw new DocumentException(doc.selectSingleNode("//settings").getText());
+        }
+
+        return node.getText();
+    }
 
 
     /**

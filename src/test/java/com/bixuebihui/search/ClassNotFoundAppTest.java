@@ -1,5 +1,6 @@
 package com.bixuebihui.search;
 
+import org.dom4j.DocumentException;
 import org.junit.jupiter.api.Test;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.tree.AbstractInsnNode;
@@ -32,7 +33,7 @@ class ClassNotFoundAppTest {
     }
 
     @Test
-    void testing() throws IOException {
+    void testing() throws IOException, DocumentException {
 
         String groupId = "org.slf4j,ch.qos.logback";
         String className = "StaticMarkerBinder";
@@ -43,7 +44,18 @@ class ClassNotFoundAppTest {
     }
 
     @Test
-    void testing1() throws IOException {
+    void testingMavenHome() throws IOException, DocumentException {
+
+        String groupId = "";
+        String className = "org.apache.log4j.Level";
+        String methodName = "";
+
+        ClassNotFoundApp.main(new String[]{"app", className, methodName, groupId});
+
+    }
+
+    @Test
+    void testing1() throws IOException, DocumentException {
 
        //  String groupId = "org.springframework.boot.context.properties";
         String groupId = "org.springframework.boot";
