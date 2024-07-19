@@ -63,7 +63,20 @@ class ClassNotFoundAppTest {
         String methodName = "-";
 
         ClassNotFoundApp.main(new String[]{"app", className, methodName, groupId});
+    }
 
+    @Test
+    void searchByFileName() throws DocumentException, IOException {
+        String ex = "Caused by: java.io.FileNotFoundException: class path resource [springfox/documentation/spring/web/SpringfoxWebConfiguration.class] cannot be opened because it does not exist";
+        String[] parts = ex.split("\\[");
+        String className = parts[1].split("\\.")[0];
+        System.out.println(className);
+
+        String groupId = "";
+
+        String methodName = "-";
+
+        ClassNotFoundApp.main(new String[]{"app", className, methodName, groupId});
     }
 
 
