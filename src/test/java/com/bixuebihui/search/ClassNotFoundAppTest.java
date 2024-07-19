@@ -67,13 +67,28 @@ class ClassNotFoundAppTest {
 
     @Test
     void searchByFileName() throws DocumentException, IOException {
-        String ex = "Caused by: java.io.FileNotFoundException: class path resource [springfox/documentation/spring/web/SpringfoxWebConfiguration.class] cannot be opened because it does not exist";
+        //String ex = "Caused by: java.io.FileNotFoundException: class path resource [springfox/documentation/spring/web/SpringfoxWebConfiguration.class] cannot be opened because it does not exist";
+        //String ex ="[springfox/documentation/swagger2/configuration/Swagger2DocumentationConfiguration.class] ";
+        //String ex = "[springfox/documentation/spi/service/ResponseBuilderPlugin.class]";
+        //String ex = "[springfox/documentation/spi/service/ResourceGroupingStrategy.class]";
+        String ex = "[springfox/documentation/spi/service/ResponseBuilderPlugin.class]";
+
+
         String[] parts = ex.split("\\[");
         String className = parts[1].split("\\.")[0];
         System.out.println(className);
 
         String groupId = "";
 
+        String methodName = "-";
+
+        ClassNotFoundApp.main(new String[]{"app", className, methodName, groupId});
+    }
+
+    @Test
+    void searchByClassName() throws DocumentException, IOException {
+        String className = "springfox.documentation.spring.web.paths.RelativePathProvider";
+        String groupId = "";
         String methodName = "-";
 
         ClassNotFoundApp.main(new String[]{"app", className, methodName, groupId});
