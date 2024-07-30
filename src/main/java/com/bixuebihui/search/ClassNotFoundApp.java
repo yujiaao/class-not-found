@@ -41,12 +41,12 @@ public class ClassNotFoundApp {
 
         for(String groupId : groupIds){
             String dirWithGroupId = mavenRepo + "/" + groupId.replace(".", "/");
-            SearchMethodInJarFile.listJarFileInDir(dirWithGroupId, jarFile -> {
+            SearchMethodInJarFile.listJarFileInDirAndSubDir(dirWithGroupId, jarFile -> {
                 if(o.searchMethodName(jarFile, className, methodName)){
                     System.out.println("Found in " + jarFile.getName());
                 }
 
-            });
+            }, 10);
         }
 
 

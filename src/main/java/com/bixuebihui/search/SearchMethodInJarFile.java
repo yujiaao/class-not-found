@@ -1,6 +1,9 @@
 package com.bixuebihui.search;
 
+
 import io.micrometer.common.util.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.DocumentHelper;
@@ -9,6 +12,7 @@ import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.tree.ClassNode;
 import org.objectweb.asm.tree.MethodNode;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Method;
@@ -23,33 +27,24 @@ public class SearchMethodInJarFile {
 
     private static final String CLASS_SUFFIX = ".class";
 
-//    public static void main(String[] args) throws IOException,
-//            SecurityException, ClassNotFoundException {
-//
-//        /** target method name to be searched */
-//        String targetMethodClass = "removeCauseMethodName";
-//
-//        /**
-//         * Specify a target method name as 'removeCauseMethodName'. Find class
-//         * name that includes the target method name in Jar File.
-//         */
-//        new SearchMethodInJarFile().searchMethodName(new JarFile(
-//                "D:\\Develop\\workspace\\Test\\commons-lang-2.4.jar"),
-//                targetMethodClass);
-//
-//    }
 
     /**
      * list all jar files in the directory
+     * max depth=10
      */
-    public static void listJarFileInDir(String dir, Consumer<JarFile> jarFileConsumer )
+    public static void listJarFileInDirAndSubDir(String dir, Consumer<JarFile> jarFileConsumer, int maxDepth )
             throws IOException, SecurityException {
         //recursive list all jar files in the directory
         Files.walkFileTree(Paths.get(dir), new SimpleFileVisitor<>() {
             @Override
             public FileVisitResult visitFile(Path file, BasicFileAttributes attrs)
                     throws IOException {
-                if (file.toString().endsWith(".jar")) {
+
+                //  get file's extension
+                String fileExt = getFileExtension(file);
+
+                if (fileExt.equals(".jar")) {
+                    System.out.printf("visiting: %s%n", file.getFileName());
                     JarFile jarFile = new JarFile(file.toFile());
                     jarFileConsumer.accept(jarFile);
                 }
@@ -156,7 +151,7 @@ public class SearchMethodInJarFile {
                  */
                 if (targetMethodName.equals(m.getName())) {
                     System.out.printf(
-                            "Method [%s] is included in Class [%s]%n",
+                            "Method [%s] is included in Class [%s]%n%n",
                             targetMethodName, name);
                     return true;
                 }
@@ -165,4 +160,15 @@ public class SearchMethodInJarFile {
         }
         return false;
     }
+
+
+    private static String getFileExtension(Path file) {
+        String name = file.getFileName().toString();
+        int lastIndexOf = name.lastIndexOf(".");
+        if (lastIndexOf == -1) {
+            return ""; // empty extension
+        }
+        return name.substring(lastIndexOf);
+    }
+
 }

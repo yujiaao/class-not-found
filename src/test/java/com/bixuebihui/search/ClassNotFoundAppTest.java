@@ -94,6 +94,16 @@ class ClassNotFoundAppTest {
         ClassNotFoundApp.main(new String[]{"app", className, methodName, groupId});
     }
 
+    @Test
+    void searchByShortClassName() throws DocumentException, IOException {
+        String className = "DataTypeHint";
+        String groupId = "org.apache.flink";
+        String methodName = "-";
+
+        ClassNotFoundApp.main(new String[]{"app", className, methodName, groupId});
+    }
+
+
 
     @Test
     void testAsm() throws IOException {
