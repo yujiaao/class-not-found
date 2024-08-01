@@ -1,7 +1,5 @@
 package com.bixuebihui.search;
 
-import org.dom4j.DocumentException;
-
 import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
@@ -11,7 +9,7 @@ import java.util.Arrays;
 
 public class ClassNotFoundApp {
 
-    public static void main(String[] args) throws IOException, DocumentException {
+    public static void main(String[] args)  {
         //SpringApplication.run(Demo1Application.class, args);
         String mavenRepo = getMavenRepoDir();
         if (mavenRepo == null) return;
@@ -41,12 +39,16 @@ public class ClassNotFoundApp {
 
         for(String groupId : groupIds){
             String dirWithGroupId = mavenRepo + "/" + groupId.replace(".", "/");
-            SearchMethodInJarFile.listJarFileInDirAndSubDir(dirWithGroupId, jarFile -> {
-                if(o.searchMethodName(jarFile, className, methodName)){
-                    System.out.println("Found in " + jarFile.getName());
-                }
+            try {
+                SearchMethodInJarFile.listJarFileInDirAndSubDir(dirWithGroupId, jarFile -> {
+                    if(o.searchMethodName(jarFile, className, methodName)){
+                        System.out.println("Found in " + jarFile.getName());
+                    }
 
-            }, 10);
+                }, 10);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
 
