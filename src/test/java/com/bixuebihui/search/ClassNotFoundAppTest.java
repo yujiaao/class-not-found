@@ -33,7 +33,7 @@ class ClassNotFoundAppTest {
     }
 
     @Test
-    void testing() throws IOException, DocumentException {
+    void testing() {
 
         String groupId = "org.slf4j,ch.qos.logback";
         String className = "StaticMarkerBinder";
@@ -44,7 +44,7 @@ class ClassNotFoundAppTest {
     }
 
     @Test
-    void testingMavenHome() throws IOException, DocumentException {
+    void testingMavenHome() {
 
         String groupId = "";
         String className = "org.apache.log4j.Level";
@@ -55,7 +55,7 @@ class ClassNotFoundAppTest {
     }
 
     @Test
-    void testing1() throws IOException, DocumentException {
+    void testing1() {
 
        //  String groupId = "org.springframework.boot.context.properties";
         String groupId = "org.springframework.boot";
@@ -66,7 +66,7 @@ class ClassNotFoundAppTest {
     }
 
     @Test
-    void searchByFileName() throws DocumentException, IOException {
+    void searchByFileName() {
         //String ex = "Caused by: java.io.FileNotFoundException: class path resource [springfox/documentation/spring/web/SpringfoxWebConfiguration.class] cannot be opened because it does not exist";
         //String ex ="[springfox/documentation/swagger2/configuration/Swagger2DocumentationConfiguration.class] ";
         //String ex = "[springfox/documentation/spi/service/ResponseBuilderPlugin.class]";
@@ -86,7 +86,7 @@ class ClassNotFoundAppTest {
     }
 
     @Test
-    void searchByClassName() throws DocumentException, IOException {
+    void searchByClassName() {
         String className = "springfox.documentation.spring.web.paths.RelativePathProvider";
         String groupId = "";
         String methodName = "-";
@@ -95,7 +95,7 @@ class ClassNotFoundAppTest {
     }
 
     @Test
-    void searchByShortClassName() throws DocumentException, IOException {
+    void searchByShortClassName() {
         String className = "DataTypeHint";
         String groupId = "org.apache.flink";
         String methodName = "-";
